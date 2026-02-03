@@ -1,0 +1,7 @@
+/* 
+   Tailwind CSS Input File 
+   Use this file if you configure a build process with Tailwind CLI.
+*/
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
