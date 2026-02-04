@@ -1,102 +1,192 @@
 <!-- Footer Component -->
-<footer class="bg-primary-dark text-white pt-20 pb-10 border-t border-white/5">
-    <div class="container mx-auto px-6">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
-            <!-- Brand -->
-            <div class="space-y-6">
-                <div class="flex items-center gap-3">
-                    <img src="assets/logos/logo_colegio.png" alt="Logo Footer"
-                        class="h-12 brightness-0 invert opacity-90">
-                    <span class="font-bold text-xl font-heading">Federico Villarreal</span>
+<footer class="relative bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white overflow-hidden">
+    <!-- Decorative Background Elements -->
+    <div class="absolute top-0 left-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-0 right-0 w-96 h-96 bg-secondary/5 rounded-full blur-3xl"></div>
+
+    <!-- Main Footer Content -->
+    <div class="relative z-10 container mx-auto px-6 pt-20 pb-12">
+        <!-- Top Section -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-16">
+            <!-- Brand Column - Takes more space -->
+            <div class="lg:col-span-4 space-y-6">
+                <!-- Logo and Name -->
+                <div class="flex items-center gap-4 mb-6">
+                    <div class="w-16 h-16 bg-white/10 backdrop-blur-sm rounded-2xl p-3 border border-white/10">
+                        <img src="assets/logos/logo_colegio.png" alt="Logo Villarreal"
+                            class="w-full h-full object-contain brightness-0 invert">
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold font-heading text-white">Federico Villarreal</h3>
+                        <p class="text-xs text-secondary font-semibold uppercase tracking-wider">Excelencia Educativa
+                        </p>
+                    </div>
                 </div>
+
+                <!-- Description -->
                 <p class="text-slate-300 text-sm leading-relaxed">
                     Institución Educativa Privada comprometida con la excelencia y la formación de valores en Piura,
                     Perú.
                 </p>
-                <div class="flex gap-4">
-                    <a href="#"
-                        class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-secondary hover:text-slate-900 transition-all">
-                        <i class="fab fa-facebook-f"></i>
+
+                <!-- Social Media -->
+                <div class="flex gap-3">
+                    <a href="https://www.facebook.com/CFV.Piura" target="_blank"
+                        class="group w-11 h-11 rounded-xl bg-white/5 hover:bg-blue-600 border border-white/10 hover:border-blue-500 flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-blue-500/20">
+                        <i class="fab fa-facebook-f text-slate-300 group-hover:text-white transition-colors"></i>
                     </a>
-                    <a href="#"
-                        class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-pink-600 hover:text-white transition-all">
-                        <i class="fab fa-instagram"></i>
+                    <a href="#" target="_blank"
+                        class="group w-11 h-11 rounded-xl bg-white/5 hover:bg-gradient-to-br hover:from-purple-600 hover:to-pink-600 border border-white/10 hover:border-pink-500 flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-pink-500/20">
+                        <i class="fab fa-instagram text-slate-300 group-hover:text-white transition-colors"></i>
                     </a>
-                    <a href="#"
-                        class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-red-600 hover:text-white transition-all">
-                        <i class="fab fa-youtube"></i>
+                    <a href="#" target="_blank"
+                        class="group w-11 h-11 rounded-xl bg-white/5 hover:bg-red-600 border border-white/10 hover:border-red-500 flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-red-500/20">
+                        <i class="fab fa-youtube text-slate-300 group-hover:text-white transition-colors"></i>
                     </a>
                 </div>
+
+                <!-- Contact Email -->
+                <a href="mailto:contacto@colegiosvillarealpiura.com"
+                    class="inline-flex items-center gap-3 px-5 py-3 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-secondary/50 rounded-xl transition-all duration-300 group">
+                    <div
+                        class="w-10 h-10 rounded-lg bg-secondary/10 flex items-center justify-center group-hover:bg-secondary/20 transition-colors">
+                        <i class="fas fa-envelope text-secondary"></i>
+                    </div>
+                    <div>
+                        <p class="text-xs text-slate-400 mb-0.5">Escríbenos</p>
+                        <p class="text-sm font-semibold text-white">contacto@colegiosvillarealpiura.com</p>
+                    </div>
+                </a>
             </div>
 
-            <!-- Links -->
-            <div>
-                <h4 class="text-lg font-bold mb-6 text-secondary">Enlaces Rápidos</h4>
-                <ul class="space-y-3 text-slate-300 text-sm">
-                    <li><a href="#inicio" class="hover:text-white transition">Inicio</a></li>
-                    <li><a href="#nosotros" class="hover:text-white transition">Nosotros</a></li>
-                    <li><a href="#niveles" class="hover:text-white transition">Niveles Académicos</a></li>
-                    <li><a href="http://erp.federicovillarreal.edu.pe" target="_blank"
-                            class="hover:text-white transition">Intranet</a></li>
+            <!-- Quick Links -->
+            <div class="lg:col-span-2">
+                <h4 class="text-lg font-bold mb-6 text-white flex items-center gap-2">
+                    <div class="w-1 h-6 bg-gradient-to-b from-primary to-secondary rounded-full"></div>
+                    Enlaces Rápidos
+                </h4>
+                <ul class="space-y-3">
+                    <li>
+                        <a href="#inicio"
+                            class="text-slate-300 hover:text-white text-sm transition-colors duration-200 flex items-center gap-2 group">
+                            <i
+                                class="fas fa-chevron-right text-xs text-secondary opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                            <span>Inicio</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#nosotros"
+                            class="text-slate-300 hover:text-white text-sm transition-colors duration-200 flex items-center gap-2 group">
+                            <i
+                                class="fas fa-chevron-right text-xs text-secondary opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                            <span>Nosotros</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#niveles"
+                            class="text-slate-300 hover:text-white text-sm transition-colors duration-200 flex items-center gap-2 group">
+                            <i
+                                class="fas fa-chevron-right text-xs text-secondary opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                            <span>Niveles Académicos</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
 
-            <!-- Contact -->
-            <div>
-                <h4 class="text-lg font-bold mb-6 text-secondary">Sedes Piura</h4>
-                <ul class="space-y-2 text-slate-300 text-xs">
-                    <li class="flex flex-col">
-                        <span class="font-bold text-white">Jr. Junín N° 241</span>
-                        <span>Tel: 980160029</span>
-                    </li>
-                    <li class="flex flex-col">
-                        <span class="font-bold text-white">Av. Tacna N° 259</span>
-                        <span>Tel: 957414693</span>
-                    </li>
-                    <li class="flex flex-col">
-                        <span class="font-bold text-white">Jr. Loreto N° 910</span>
-                        <span>Tel: 951443954</span>
-                    </li>
-                    <li class="flex flex-col">
-                        <span class="font-bold text-white">Av. Richard Cushing N° 410</span>
-                        <span>Tel: 938783566</span>
-                    </li>
-                    <li class="flex flex-col">
-                        <span class="font-bold text-white">Los jardines de la avifap ex corp Mz O Lt 01</span>
-                        <span>Tel: 943034222</span>
-                    </li>
-                    <li class="flex flex-col">
-                        <span class="font-bold text-white">Calle Arequipa N° 1275</span>
-                        <span>Tel: 938783566</span>
-                    </li>
-                </ul>
-                <div class="mt-4 pt-4 border-t border-white/10">
-                    <a href="mailto:contacto@colegiosvillarealpiura.com"
-                        class="flex items-center gap-2 text-sm text-secondary hover:text-white transition">
-                        <i class="fas fa-envelope"></i>
-                        <span>contacto@colegiosvillarealpiura.com</span>
-                    </a>
+            <!-- Sedes -->
+            <div class="lg:col-span-3">
+                <h4 class="text-lg font-bold mb-6 text-white flex items-center gap-2">
+                    <div class="w-1 h-6 bg-gradient-to-b from-primary to-secondary rounded-full"></div>
+                    Sedes en Piura
+                </h4>
+                <div class="space-y-3 text-xs">
+                    <div class="group cursor-pointer">
+                        <p class="font-bold text-white mb-0.5 group-hover:text-secondary transition-colors">Jr. Junín N°
+                            241</p>
+                        <p class="text-slate-400 flex items-center gap-2">
+                            <i class="fas fa-phone text-secondary text-[10px]"></i>
+                            980160029
+                        </p>
+                    </div>
+                    <div class="group cursor-pointer">
+                        <p class="font-bold text-white mb-0.5 group-hover:text-secondary transition-colors">Av. Tacna N°
+                            259</p>
+                        <p class="text-slate-400 flex items-center gap-2">
+                            <i class="fas fa-phone text-secondary text-[10px]"></i>
+                            957414693
+                        </p>
+                    </div>
+                    <div class="group cursor-pointer">
+                        <p class="font-bold text-white mb-0.5 group-hover:text-secondary transition-colors">Jr. Loreto
+                            N° 910</p>
+                        <p class="text-slate-400 flex items-center gap-2">
+                            <i class="fas fa-phone text-secondary text-[10px]"></i>
+                            951443954
+                        </p>
+                    </div>
+                    <div class="group cursor-pointer">
+                        <p class="font-bold text-white mb-0.5 group-hover:text-secondary transition-colors">Av. Richard
+                            Cushing N° 410</p>
+                        <p class="text-slate-400 flex items-center gap-2">
+                            <i class="fas fa-phone text-secondary text-[10px]"></i>
+                            938783566
+                        </p>
+                    </div>
+                    <div class="group cursor-pointer">
+                        <p class="font-bold text-white mb-0.5 group-hover:text-secondary transition-colors">Los Jardines
+                            de la AVIFAP</p>
+                        <p class="text-slate-400 flex items-center gap-2">
+                            <i class="fas fa-phone text-secondary text-[10px]"></i>
+                            943034222
+                        </p>
+                    </div>
+                    <div class="group cursor-pointer">
+                        <p class="font-bold text-white mb-0.5 group-hover:text-secondary transition-colors">Calle
+                            Arequipa N° 1275</p>
+                        <p class="text-slate-400 flex items-center gap-2">
+                            <i class="fas fa-phone text-secondary text-[10px]"></i>
+                            938783566
+                        </p>
+                    </div>
                 </div>
             </div>
 
             <!-- Map -->
-            <div>
-                <h4 class="text-lg font-bold mb-6 text-secondary">Ubicación Principal</h4>
-                <div class="h-64 rounded-lg overflow-hidden border border-slate-700 shadow-lg">
+            <div class="lg:col-span-3">
+                <h4 class="text-lg font-bold mb-6 text-white flex items-center gap-2">
+                    <div class="w-1 h-6 bg-gradient-to-b from-primary to-secondary rounded-full"></div>
+                    Ubicación Principal
+                </h4>
+                <div
+                    class="h-64 rounded-2xl overflow-hidden border-2 border-white/10 shadow-2xl hover:border-secondary/30 transition-all duration-300 group">
                     <iframe
                         src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d6798.322716383959!2d-80.624451!3d-5.1919010000000005!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x904a10797e6cefe7%3A0x1fb53774268f968d!2sColegio%20Federico%20Villarreal!5e1!3m2!1ses!2spe!4v1770129810839!5m2!1ses!2spe"
                         width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
-                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        referrerpolicy="no-referrer-when-downgrade"
+                        class="grayscale group-hover:grayscale-0 transition-all duration-500"></iframe>
                 </div>
             </div>
         </div>
 
-        <div
-            class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-500">
-            <p>&copy; 2026 Colegio Federico Villarreal. Todos los derechos reservados.</p>
-            <div class="flex gap-6">
-                <a href="#" class="hover:text-white transition">Política de Privacidad</a>
-                <a href="#" class="hover:text-white transition">Términos y Condiciones</a>
+        <!-- Bottom Section -->
+        <div class="border-t border-white/10 pt-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                <!-- Copyright -->
+                <p class="text-xs text-slate-400">
+                    © 2026 <span class="font-semibold text-slate-300">Colegio Federico Villarreal</span>. Todos los
+                    derechos reservados.
+                </p>
+
+                <!-- Footer Links -->
+                <div class="flex items-center gap-6 text-xs">
+                    <a href="#" class="text-slate-400 hover:text-white transition-colors duration-200">
+                        Política de Privacidad
+                    </a>
+                    <span class="text-slate-600">•</span>
+                    <a href="#" class="text-slate-400 hover:text-white transition-colors duration-200">
+                        Términos y Condiciones
+                    </a>
+                </div>
             </div>
         </div>
     </div>
