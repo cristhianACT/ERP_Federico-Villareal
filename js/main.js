@@ -36,6 +36,7 @@ const ComponentLoader = {
             { path: 'components/header.html', target: '#header-component' },
             { path: 'components/hero.html', target: '#hero-component' },
             { path: 'components/about.html', target: '#about-component' },
+            { path: 'components/achievements.html', target: '#achievements-component' },
             { path: 'components/levels.html', target: '#levels-component' },
             { path: 'components/proposal.html', target: '#proposal-component' },
             { path: 'components/contact.html', target: '#contact-component' },
