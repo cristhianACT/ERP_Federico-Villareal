@@ -1,0 +1,39 @@
+<!-- Header Component -->
+<header class="fixed w-full top-0 z-50 transition-all duration-300 glass shadow-sm border-b border-primary/10">
+    <div class="container mx-auto px-6 h-20 flex justify-between items-center">
+        <!-- Logo -->
+        <a href="#" class="flex items-center gap-3 group">
+            <img src="assets/logos/logo_colegio.png" alt="Escudo Villarreal"
+                class="h-12 w-auto drop-shadow-md group-hover:scale-105 transition-transform">
+            <div class="leading-tight">
+                <h1 class="text-xl md:text-2xl font-bold font-heading text-primary tracking-tight">
+                    Federico Villarreal
+                </h1>
+                <p class="text-[10px] md:text-xs font-semibold text-secondary uppercase tracking-widest">Excelencia
+                    Educativa</p>
+            </div>
+        </a>
+
+        <!-- Desktop Nav -->
+        <nav class="hidden lg:flex items-center space-x-8 text-sm font-semibold text-slate-600">
+            <a href="#inicio" class="hover:text-primary transition active:text-primary">Inicio</a>
+            <a href="#nosotros" class="hover:text-primary transition">Nosotros</a>
+            <a href="#niveles" class="hover:text-primary transition">Niveles</a>
+            <a href="#propuesta" class="hover:text-primary transition">Propuesta</a>
+            <a href="#contacto" class="hover:text-primary transition">Contacto</a>
+        </nav>
+
+        <!-- Actions -->
+        <div class="hidden lg:flex items-center gap-4">
+            <a href="#contacto"
+                class="bg-gradient-to-r from-primary to-primary-light text-white px-6 py-2.5 rounded-full text-sm font-bold shadow-lg shadow-green-900/20 hover:shadow-green-900/40 hover:-translate-y-0.5 transition-all">
+                Admisión 2026
+            </a>
+        </div>
+
+        <!-- Mobile Menu Btn -->
+        <button class="lg:hidden text-2xl text-primary">
+            <i class="fas fa-bars"></i>
+        </button>
+    </div>
+</header>
