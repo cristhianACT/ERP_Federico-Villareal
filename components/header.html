@@ -31,9 +31,49 @@
             </a>
         </div>
 
-        <!-- Mobile Menu Btn -->
-        <button class="lg:hidden text-2xl text-primary">
+        <!-- Mobile Menu Button -->
+        <button id="mobile-menu-btn"
+            class="lg:hidden text-2xl text-primary transition-transform duration-300 hover:scale-110">
             <i class="fas fa-bars"></i>
         </button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu"
+        class="lg:hidden absolute top-full left-0 w-full bg-white shadow-2xl border-t border-primary/10 transform origin-top transition-all duration-300 ease-out scale-y-0 opacity-0">
+        <nav class="container mx-auto px-6 py-6 flex flex-col space-y-4">
+            <a href="#inicio"
+                class="mobile-menu-link text-slate-700 hover:text-primary font-semibold py-3 px-4 rounded-xl hover:bg-primary/5 transition-all flex items-center gap-3">
+                <i class="fas fa-home text-primary"></i>
+                <span>Inicio</span>
+            </a>
+            <a href="#nosotros"
+                class="mobile-menu-link text-slate-700 hover:text-primary font-semibold py-3 px-4 rounded-xl hover:bg-primary/5 transition-all flex items-center gap-3">
+                <i class="fas fa-info-circle text-primary"></i>
+                <span>Nosotros</span>
+            </a>
+            <a href="#niveles"
+                class="mobile-menu-link text-slate-700 hover:text-primary font-semibold py-3 px-4 rounded-xl hover:bg-primary/5 transition-all flex items-center gap-3">
+                <i class="fas fa-graduation-cap text-primary"></i>
+                <span>Niveles</span>
+            </a>
+            <a href="#propuesta"
+                class="mobile-menu-link text-slate-700 hover:text-primary font-semibold py-3 px-4 rounded-xl hover:bg-primary/5 transition-all flex items-center gap-3">
+                <i class="fas fa-lightbulb text-primary"></i>
+                <span>Propuesta</span>
+            </a>
+            <a href="#contacto"
+                class="mobile-menu-link text-slate-700 hover:text-primary font-semibold py-3 px-4 rounded-xl hover:bg-primary/5 transition-all flex items-center gap-3">
+                <i class="fas fa-envelope text-primary"></i>
+                <span>Contacto</span>
+            </a>
+
+            <!-- Mobile CTA Button -->
+            <a href="#contacto"
+                class="mobile-menu-link bg-gradient-to-r from-primary to-primary-light text-white px-6 py-4 rounded-xl text-center font-bold shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2">
+                <i class="fas fa-user-plus"></i>
+                <span>Admisión 2026</span>
+            </a>
+        </nav>
     </div>
 </header>

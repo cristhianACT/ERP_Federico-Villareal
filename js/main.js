@@ -69,6 +69,9 @@ const ComponentLoader = {
 
         // Initialize scroll effects
         initScrollEffects();
+
+        // Initialize mobile menu
+        initMobileMenu();
     }
 };
 
@@ -107,6 +110,79 @@ function initScrollEffects() {
 }
 
 /**
+ * Initialize mobile menu functionality
+ */
+function initMobileMenu() {
+    const menuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuLinks = document.querySelectorAll('.mobile-menu-link');
+    const menuIcon = menuBtn?.querySelector('i');
+
+    if (!menuBtn || !mobileMenu) return;
+
+    let isMenuOpen = false;
+
+    // Toggle menu
+    const toggleMenu = () => {
+        isMenuOpen = !isMenuOpen;
+
+        if (isMenuOpen) {
+            // Open menu
+            mobileMenu.classList.remove('scale-y-0', 'opacity-0');
+            mobileMenu.classList.add('scale-y-100', 'opacity-100');
+            menuIcon.classList.remove('fa-bars');
+            menuIcon.classList.add('fa-times');
+            menuBtn.classList.add('rotate-90');
+            document.body.style.overflow = 'hidden'; // Prevent scroll
+        } else {
+            // Close menu
+            mobileMenu.classList.remove('scale-y-100', 'opacity-100');
+            mobileMenu.classList.add('scale-y-0', 'opacity-0');
+            menuIcon.classList.remove('fa-times');
+            menuIcon.classList.add('fa-bars');
+            menuBtn.classList.remove('rotate-90');
+            document.body.style.overflow = ''; // Restore scroll
+        }
+    };
+
+    // Button click event
+    menuBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleMenu();
+    });
+
+    // Close menu when clicking on links
+    menuLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            if (isMenuOpen) {
+                toggleMenu();
+            }
+        });
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (isMenuOpen && !mobileMenu.contains(e.target) && !menuBtn.contains(e.target)) {
+            toggleMenu();
+        }
+    });
+
+    // Close menu on escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && isMenuOpen) {
+            toggleMenu();
+        }
+    });
+
+    // Close menu on window resize to desktop
+    window.addEventListener('resize', () => {
+        if (window.innerWidth >= 1024 && isMenuOpen) {
+            toggleMenu();
+        }
+    });
+}
+
+/**
  * Initialize on DOM ready
  */
 document.addEventListener('DOMContentLoaded', () => {
@@ -114,15 +190,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Load all components
     ComponentLoader.loadAll();
-
-    // Mobile menu toggle (if needed in future)
-    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-    if (mobileMenuBtn) {
-        mobileMenuBtn.addEventListener('click', () => {
-            // Mobile menu logic here
-            console.log('Mobile menu clicked');
-        });
-    }
 });
 
 /**
