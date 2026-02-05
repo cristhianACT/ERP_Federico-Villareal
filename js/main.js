@@ -5,28 +5,28 @@
 
 // Component loader utility
 const ComponentLoader = {
-  /**
-   * Load HTML component from external file
-   * @param {string} componentPath - Path to component file
-   * @param {string} targetSelector - CSS selector for target element
-   */
-  async loadComponent(componentPath, targetSelector) {
-    try {
-      const response = await fetch(componentPath);
-      if (!response.ok) {
-        throw new Error(`Failed to load component: ${componentPath}`);
-      }
-      const html = await response.text();
-      const targetElement = document.querySelector(targetSelector);
-      if (targetElement) {
-        targetElement.innerHTML = html;
-      } else {
-        console.warn(`Target element not found: ${targetSelector}`);
-      }
-    } catch (error) {
-      console.error("Error loading component:", error);
-    }
-  },
+    /**
+     * Load HTML component from external file
+     * @param {string} componentPath - Path to component file
+     * @param {string} targetSelector - CSS selector for target element
+     */
+    async loadComponent(componentPath, targetSelector) {
+        try {
+            const response = await fetch(componentPath);
+            if (!response.ok) {
+                throw new Error(`Failed to load component: ${componentPath}`);
+            }
+            const html = await response.text();
+            const targetElement = document.querySelector(targetSelector);
+            if (targetElement) {
+                targetElement.innerHTML = html;
+            } else {
+                console.warn(`Target element not found: ${targetSelector}`);
+            }
+        } catch (error) {
+            console.error("Error loading component:", error);
+        }
+    },
 
     /**
      * Load all components defined in the mapping
@@ -37,6 +37,7 @@ const ComponentLoader = {
             { path: 'components/hero.html', target: '#hero-component' },
             { path: 'components/about.html', target: '#about-component' },
             { path: 'components/achievements.html', target: '#achievements-component' },
+            { path: 'components/teachers.html', target: '#teachers-component' },
             { path: 'components/levels.html', target: '#levels-component' },
             { path: 'components/proposal.html', target: '#proposal-component' },
             { path: 'components/contact.html', target: '#contact-component' },
@@ -50,7 +51,7 @@ const ComponentLoader = {
 
         // Initialize after components are loaded
         this.initializeAfterLoad();
-        
+
         // Initialize Level Modals (New)
         initLevelModals();
     },
@@ -72,7 +73,7 @@ const ComponentLoader = {
 
         // Initialize scroll effects
         initScrollEffects();
-        
+
         // Initialize Mobile Menu
         initMobileMenu();
     }
@@ -186,7 +187,7 @@ function initLevelModals() {
             const level = trigger.dataset.level;
             openLevelModal(level);
         }
-        
+
         // Close buttons inputs
         if (e.target.closest('.close-modal-btn') || e.target.id === 'modal-backdrop') {
             closeLevelModal();
@@ -205,6 +206,46 @@ function initLevelModals() {
 }
 
 /**
+ * Toggle the extra team section in teachers component
+ */
+function toggleTeam() {
+    const extraTeam = document.getElementById('extra-team');
+    const btnText = document.getElementById('toggle-team-text');
+    const btnIcon = document.getElementById('toggle-team-icon');
+
+    if (!extraTeam) return;
+
+    if (extraTeam.classList.contains('hidden')) {
+        // Show
+        extraTeam.classList.remove('hidden');
+        // Small delay to allow display:block to apply before opacity transition
+        setTimeout(() => {
+            extraTeam.classList.remove('opacity-0', 'translate-y-10');
+            extraTeam.classList.add('opacity-100', 'translate-y-0');
+        }, 10);
+
+        btnText.textContent = "Ver menos";
+        btnIcon.classList.remove('fa-arrow-down');
+        btnIcon.classList.add('fa-arrow-up');
+    } else {
+        // Hide
+        extraTeam.classList.remove('opacity-100', 'translate-y-0');
+        extraTeam.classList.add('opacity-0', 'translate-y-10');
+
+        // Wait for transition to finish
+        setTimeout(() => {
+            extraTeam.classList.add('hidden');
+        }, 700);
+
+        btnText.textContent = "Conoce a todo el equipo";
+        btnIcon.classList.remove('fa-arrow-up');
+        btnIcon.classList.add('fa-arrow-down');
+    }
+}
+// Make global
+window.toggleTeam = toggleTeam;
+
+/**
  * Open the modal with specific level data
  * @param {string} levelKey - Key to look up in levelData
  */
@@ -216,7 +257,7 @@ function openLevelModal(levelKey) {
     const backdrop = document.getElementById('modal-backdrop');
     const panel = document.getElementById('modal-panel');
     const headerBg = document.getElementById('modal-header-bg');
-    
+
     // UI Elements
     const titleEl = document.getElementById('modal-title');
     const subtitleEl = document.getElementById('modal-subtitle');
@@ -228,7 +269,7 @@ function openLevelModal(levelKey) {
     titleEl.textContent = data.title;
     subtitleEl.textContent = data.subtitle;
     descEl.textContent = data.description;
-    
+
     // Update Header Color
     headerBg.className = `h-32 sm:h-40 bg-gradient-to-r ${data.color} flex items-center justify-center relative overflow-hidden`;
 
@@ -247,7 +288,7 @@ function openLevelModal(levelKey) {
 
     // Show Modal with Animation
     modal.classList.remove('hidden');
-    
+
     // Slight delay to allow display:block to apply before opacity transition
     setTimeout(() => {
         backdrop.classList.remove('opacity-0');
@@ -392,7 +433,7 @@ function initMobileMenu() {
  * Initialize on DOM ready
  */
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("🎓 Colegio Federico Villarreal - Website Loaded");
+    console.log("🎓 Colegio Federico Villarreal - Website Loaded");
 
     // Load all components
     ComponentLoader.loadAll();
@@ -404,5 +445,5 @@ document.addEventListener("DOMContentLoaded", () => {
  * Export for potential module usage
  */
 if (typeof module !== "undefined" && module.exports) {
-  module.exports = { ComponentLoader };
+    module.exports = { ComponentLoader };
 }
