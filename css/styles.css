@@ -182,6 +182,18 @@ section {
     }
 }
 
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
 .animate-fade-in-up {
     animation: fadeInUp 0.8s ease-out forwards;
 }

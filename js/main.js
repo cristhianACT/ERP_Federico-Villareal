@@ -87,6 +87,7 @@ const levelData = {
         title: "Nivel Inicial",
         subtitle: "3, 4 y 5 años",
         color: "from-primary to-primary-light", // Green gradient
+        icon: "fa-shapes", // Icono personalizado
         description: "En nuestro nivel inicial, nos enfocamos en el desarrollo integral del niño a través del juego y la exploración. Nuestro método estimula la creatividad, la socialización y el desarrollo emocional en un ambiente seguro y acogedor.",
         features: [
             "Estimulación Temprana y Sensorial",
@@ -105,6 +106,7 @@ const levelData = {
         title: "Nivel Primaria",
         subtitle: "1° a 6° Grado",
         color: "from-secondary to-yellow-400", // Gold gradient
+        icon: "fa-book-open", // Icono personalizado
         description: "Formamos una base sólida de conocimientos y valores. Fomentamos el pensamiento crítico, la investigación y el trabajo en equipo, preparando a los estudiantes para los retos académicos del futuro.",
         features: [
             "Matemática Lúdica y Razonada",
@@ -123,6 +125,7 @@ const levelData = {
         title: "Nivel Secundaria",
         subtitle: "1° a 5° Año",
         color: "from-primary-dark to-green-900", // Dark Green gradient
+        icon: "fa-microscope", // Icono personalizado
         description: "Potenciamos las habilidades académicas y personales de nuestros estudiantes. Nuestro sistema pre-universitario desde los últimos años garantiza un alto nivel de competitividad y éxito en admisiones universitarias.",
         features: [
             "Sistema Pre-Universitario",
@@ -141,6 +144,7 @@ const levelData = {
         title: "Academia Pre-U",
         subtitle: "Preparación Exclusiva",
         color: "from-accent to-red-600", // Red gradient
+        icon: "fa-graduation-cap", // Icono personalizado
         description: "Somos especialistas en el ingreso a la Universidad Nacional de Piura (UNP) y otras universidades de prestigio. Nuestro sistema intensivo y plana docente experta maximizan tus posibilidades de ingreso.",
         features: [
             "Sistema Modular por carreras",
@@ -159,6 +163,7 @@ const levelData = {
         title: "CEBA Villarreal",
         subtitle: "Educación Básica Alternativa",
         color: "from-blue-600 to-blue-400", // Blue gradient
+        icon: "fa-user-clock", // Icono personalizado
         description: "Nunca es tarde para terminar tus estudios. Nuestro programa CEBA permite concluir la primaria o secundaria en corto tiempo con horarios flexibles adaptados a personas que trabajan.",
         features: [
             "Ciclos acelerados (2 grados en 1 año)",
@@ -264,27 +269,34 @@ function openLevelModal(levelKey) {
     const descEl = document.getElementById('modal-description');
     const featuresList = document.getElementById('modal-features');
     const benefitsList = document.getElementById('modal-benefits');
+    const iconEl = document.getElementById('modal-icon');
 
     // Populate Data
     titleEl.textContent = data.title;
     subtitleEl.textContent = data.subtitle;
     descEl.textContent = data.description;
 
-    // Update Header Color
-    headerBg.className = `h-32 sm:h-40 bg-gradient-to-r ${data.color} flex items-center justify-center relative overflow-hidden`;
+    // Update Icon
+    if (iconEl && data.icon) {
+        iconEl.className = `fas ${data.icon} text-4xl text-white`;
+    }
 
-    // Populate Lists helper
-    const createListItems = (items) => {
-        return items.map(item => `
-            <li class="flex items-start gap-3">
-                <i class="fas fa-check-circle text-green-500 mt-1 flex-shrink-0"></i>
-                <span class="text-sm text-slate-600">${item}</span>
+    // Update Header Color
+    headerBg.className = `md:w-[38%] relative flex flex-col items-center justify-center p-12 text-center text-white overflow-hidden bg-gradient-to-br ${data.color}`;
+
+    // Populate Lists helper con diseño Ultra-Minimalista
+    const createListItems = (items, colorClass) => {
+        return items.map((item, index) => `
+            <li class="group flex items-center gap-4 p-4 rounded-2xl bg-white border border-slate-100 hover:border-primary/20 hover:shadow-md transition-all duration-300" 
+                style="animation: fadeInUp 0.5s ease-out ${index * 0.1}s backwards;">
+                <div class="w-2 h-2 rounded-full ${colorClass} group-hover:scale-150 transition-transform duration-300"></div>
+                <span class="text-sm md:text-base text-slate-700 font-medium">${item}</span>
             </li>
         `).join('');
     };
 
-    featuresList.innerHTML = createListItems(data.features);
-    benefitsList.innerHTML = createListItems(data.benefits);
+    featuresList.innerHTML = createListItems(data.features, 'bg-primary');
+    benefitsList.innerHTML = createListItems(data.benefits, 'bg-secondary');
 
     // Show Modal with Animation
     modal.classList.remove('hidden');
