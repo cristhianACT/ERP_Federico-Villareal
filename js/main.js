@@ -284,13 +284,13 @@ function openLevelModal(levelKey) {
     // Update Header Color
     headerBg.className = `md:w-[38%] relative flex flex-col items-center justify-center p-12 text-center text-white overflow-hidden bg-gradient-to-br ${data.color}`;
 
-    // Populate Lists helper con diseño Ultra-Minimalista
+    // Populate Lists helper con diseño Ultra-Minimalista Compacto
     const createListItems = (items, colorClass) => {
         return items.map((item, index) => `
-            <li class="group flex items-center gap-4 p-4 rounded-2xl bg-white border border-slate-100 hover:border-primary/20 hover:shadow-md transition-all duration-300" 
-                style="animation: fadeInUp 0.5s ease-out ${index * 0.1}s backwards;">
-                <div class="w-2 h-2 rounded-full ${colorClass} group-hover:scale-150 transition-transform duration-300"></div>
-                <span class="text-sm md:text-base text-slate-700 font-medium">${item}</span>
+            <li class="group flex items-center gap-3 p-2.5 rounded-xl bg-white border border-slate-100 hover:border-primary/20 hover:shadow-sm transition-all duration-300" 
+                style="animation: fadeInUp 0.5s ease-out ${index * 0.08}s backwards;">
+                <div class="w-1.5 h-1.5 rounded-full ${colorClass} group-hover:scale-125 transition-transform duration-300"></div>
+                <span class="text-xs md:text-sm text-slate-700 font-medium">${item}</span>
             </li>
         `).join('');
     };
