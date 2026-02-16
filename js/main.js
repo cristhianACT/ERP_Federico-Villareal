@@ -86,96 +86,77 @@ const levelData = {
     inicial: {
         title: "Nivel Inicial",
         subtitle: "3, 4 y 5 años",
-        color: "from-primary to-primary-light", // Green gradient
-        icon: "fa-shapes", // Icono personalizado
-        description: "En nuestro nivel inicial, nos enfocamos en el desarrollo integral del niño a través del juego y la exploración. Nuestro método estimula la creatividad, la socialización y el desarrollo emocional en un ambiente seguro y acogedor.",
+        color: "from-primary to-primary-light",
+        icon: "fa-shapes",
+        description: "Atención de niños de 3, 4 y 5 años respetando sus características psicoevolutivas. Estimulamos el pensamiento reflexivo, la creatividad y la imaginación en contextos reales.",
         features: [
-            "Estimulación Temprana y Sensorial",
-            "Iniciación a la lectura y escritura",
-            "Taller de Psicomotricidad",
-            "Inglés recreativo"
+            "Pensamiento reflexivo y juicio crítico",
+            "Juego, creatividad e imaginación",
+            "Sana convivencia social y natural",
+            "Desarrollo de destrezas: Aprender a hacer"
         ],
         benefits: [
-            "Aulas climatizadas y multimedia",
-            "Seguimiento psicológico personalizado",
-            "Áreas de juegos exclusivas",
-            "Docentes especializadas en primera infancia"
+            "Herramientas tecnológicas en aula",
+            "Vínculo afectivo familiar fortalecido",
+            "Práctica constante de valores",
+            "Recursos pedagógicos vanguardistas"
         ]
     },
     primaria: {
         title: "Nivel Primaria",
-        subtitle: "1° a 6° Grado",
-        color: "from-secondary to-yellow-400", // Gold gradient
-        icon: "fa-book-open", // Icono personalizado
-        description: "Formamos una base sólida de conocimientos y valores. Fomentamos el pensamiento crítico, la investigación y el trabajo en equipo, preparando a los estudiantes para los retos académicos del futuro.",
+        subtitle: "Formación Integral",
+        color: "from-secondary to-yellow-400",
+        icon: "fa-book-open",
+        description: "Servicio educativo basado en la igualdad, respetando intereses, necesidades y ritmos de aprendizaje. Buscamos el óptimo desarrollo de la personalidad y formación integral.",
         features: [
-            "Matemática Lúdica y Razonada",
-            "Plan Lector Intensivo",
-            "Ciencia y Tecnología experimental",
-            "Arte y Cultura"
+            "Construcción y toma de decisiones",
+            "Identidad ciudadana y valores",
+            "Conciencia ambiental y trabajo en equipo",
+            "Logro de aprendizajes esperados"
         ],
         benefits: [
-            "Laboratorio de Computación",
-            "Talleres deportivos (Fútbol, Vóley)",
-            "Inglés intensivo por niveles",
-            "Tutoría permanente"
+            "Uso estratégico de tecnología",
+            "Actividad física y deporte",
+            "Participación permanente de padres",
+            "Desarrollo de todas las áreas curriculares"
         ]
     },
     secundaria: {
         title: "Nivel Secundaria",
-        subtitle: "1° a 5° Año",
-        color: "from-primary-dark to-green-900", // Dark Green gradient
-        icon: "fa-microscope", // Icono personalizado
-        description: "Potenciamos las habilidades académicas y personales de nuestros estudiantes. Nuestro sistema pre-universitario desde los últimos años garantiza un alto nivel de competitividad y éxito en admisiones universitarias.",
+        subtitle: "Preparación para la Vida",
+        color: "from-primary-dark to-green-900",
+        icon: "fa-microscope",
+        description: "Fomentamos el aprendizaje autónomo (Aprender a aprender) y la convivencia armónica (Aprender a vivir juntos) para enfrentar con éxito la sociedad real.",
         features: [
-            "Sistema Pre-Universitario",
-            "Círculos de Estudio Avanzado",
-            "Orientación Vocacional",
-            "Desarrollo de proyectos de investigación"
+            "Aprendizaje autónomo y construcción",
+            "Identidad ciudadana y conciencia ambiental",
+            "Preparación para el mercado laboral",
+            "Habilidades interpersonales y afectivas"
         ],
         benefits: [
-            "Laboratorios de física y química",
-            "Simulacros tipo admisión semanaes",
-            "Certificación en ofimática",
-            "Convenios universitarios"
+            "Tecnología para un mundo cambiante",
+            "Actividad física y deporte",
+            "Participación de padres de familia",
+            "Enfoque en la calidad de vida"
         ]
     },
     academia: {
         title: "Academia Pre-U",
-        subtitle: "Preparación Exclusiva",
-        color: "from-accent to-red-600", // Red gradient
-        icon: "fa-graduation-cap", // Icono personalizado
-        description: "Somos especialistas en el ingreso a la Universidad Nacional de Piura (UNP) y otras universidades de prestigio. Nuestro sistema intensivo y plana docente experta maximizan tus posibilidades de ingreso.",
+        subtitle: "Éxito Universitario",
+        color: "from-accent to-red-600",
+        icon: "fa-graduation-cap",
+        description: "Institución sólida con 11 años de experiencia en potenciar conocimientos y habilidades. Especialistas en masivos ingresos y primeros puestos en la UNP (Cómputos 2017-2020).",
         features: [
-            "Sistema Modular por carreras",
-            "Simulacros diarios y ranking",
-            "Seminarios dominicales",
-            "Banco de preguntas actualizado"
+            "Metodología: 40% práctica / 60% teoría",
+            "Clases en vivo vía Google Meet",
+            "Simulacros y solucionarios sabatinos",
+            "Preparación para el éxito profesional"
         ],
         benefits: [
-            "Plana docente universitaria",
-            "Material didáctico exclusivo",
-            "Asesoría académica personalizada",
-            "Test vocacional computarizado"
-        ]
-    },
-    ceba: {
-        title: "CEBA Villarreal",
-        subtitle: "Educación Básica Alternativa",
-        color: "from-blue-600 to-blue-400", // Blue gradient
-        icon: "fa-user-clock", // Icono personalizado
-        description: "Nunca es tarde para terminar tus estudios. Nuestro programa CEBA permite concluir la primaria o secundaria en corto tiempo con horarios flexibles adaptados a personas que trabajan.",
-        features: [
-            "Ciclos acelerados (2 grados en 1 año)",
-            "Horarios: Mañana, Tarde, Noche y Sabatino",
-            "Modalidad Semipresencial y A Distancia",
-            "Convalidación de estudios previos"
-        ],
-        benefits: [
-            "Certificado oficial a nombre de la Nación",
-            "Material de estudio auto-instructivo",
-            "Plataforma virtual de apoyo",
-            "Costos accesibles"
+            "Clases grabadas (17 cursos)",
+            "Horario flexible: 4pm a 8pm",
+            "Plana docente con 11 años de eficacia",
+            "Asesorías y nivelación personalizada"
         ]
     }
 };
