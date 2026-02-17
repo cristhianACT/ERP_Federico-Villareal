@@ -435,6 +435,29 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 /**
+ * Handle Contact Form Submission - Redirect to WhatsApp
+ * @param {Event} event - Form submission event
+ */
+function handleContactFormSubmit(event) {
+    event.preventDefault();
+
+    const name = document.getElementById('parent-name').value;
+    const email = document.getElementById('parent-email').value;
+    const level = document.getElementById('interest-level').value;
+
+    const whatsappNumber = "51980160029";
+    const message = `Hola, solicito información para el Proceso de Admisión 2026.%0A%0A*Datos del Apoderado:*%0A- *Nombre:* ${name}%0A- *Correo:* ${email}%0A- *Nivel de interés:* ${level}`;
+
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${message}`;
+
+    // Redirect to WhatsApp
+    window.open(whatsappUrl, '_blank');
+}
+
+// Make global for inline onsubmit
+window.handleContactFormSubmit = handleContactFormSubmit;
+
+/**
  * Export for potential module usage
  */
 if (typeof module !== "undefined" && module.exports) {
