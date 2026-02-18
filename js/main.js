@@ -1,15 +1,4 @@
-/**
- * Component Loader & Main JS
- * Colegio Federico Villarreal Website - Refactored
- */
-
-// Component loader utility
 const ComponentLoader = {
-    /**
-     * Load HTML component from external file
-     * @param {string} componentPath - Path to component file
-     * @param {string} targetSelector - CSS selector for target element
-     */
     async loadComponent(componentPath, targetSelector) {
         try {
             const response = await fetch(componentPath);
@@ -28,9 +17,6 @@ const ComponentLoader = {
         }
     },
 
-    /**
-     * Load all components defined in the mapping
-     */
     async loadAll() {
         const components = [
             { path: 'components/header.html', target: '#header-component' },
@@ -45,23 +31,16 @@ const ComponentLoader = {
             { path: 'components/footer.html', target: '#footer-component' }
         ];
 
-        // Load all components in parallel
         await Promise.all(
             components.map(comp => this.loadComponent(comp.path, comp.target))
         );
 
-        // Initialize after components are loaded
         this.initializeAfterLoad();
 
-        // Initialize Level Modals (New)
         initLevelModals();
     },
 
-    /**
-     * Initialize functionality after components are loaded
-     */
     initializeAfterLoad() {
-        // Initialize AOS animations
         if (typeof AOS !== 'undefined') {
             AOS.init({
                 once: false,
@@ -72,17 +51,12 @@ const ComponentLoader = {
             });
         }
 
-        // Initialize scroll effects
         initScrollEffects();
 
-        // Initialize Mobile Menu
         initMobileMenu();
     }
 };
 
-/**
- * Data for Level Modals
- */
 const levelData = {
     inicial: {
         title: "Nivel Inicial",
@@ -162,11 +136,7 @@ const levelData = {
     }
 };
 
-/**
- * Initialize Level Modals Logic
- */
 function initLevelModals() {
-    // Event delegation for opening modals (since elements might be properly ready or re-injected)
     document.addEventListener('click', (e) => {
         const trigger = e.target.closest('.level-modal-trigger');
         if (trigger) {
@@ -175,26 +145,20 @@ function initLevelModals() {
             openLevelModal(level);
         }
 
-        // Close buttons inputs
         if (e.target.closest('.close-modal-btn') || e.target.id === 'modal-backdrop') {
             closeLevelModal();
         }
     });
 
-    // Close on ESC key
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
             closeLevelModal();
         }
     });
 
-    // Make close function global for inline onclicks if needed
     window.closeLevelModal = closeLevelModal;
 }
 
-/**
- * Toggle the extra team section in teachers component
- */
 function toggleTeam() {
     const extraTeam = document.getElementById('extra-team');
     const btnText = document.getElementById('toggle-team-text');
@@ -203,9 +167,7 @@ function toggleTeam() {
     if (!extraTeam) return;
 
     if (extraTeam.classList.contains('hidden')) {
-        // Show
         extraTeam.classList.remove('hidden');
-        // Small delay to allow display:block to apply before opacity transition
         setTimeout(() => {
             extraTeam.classList.remove('opacity-0', 'translate-y-10');
             extraTeam.classList.add('opacity-100', 'translate-y-0');
@@ -215,11 +177,9 @@ function toggleTeam() {
         btnIcon.classList.remove('fa-arrow-down');
         btnIcon.classList.add('fa-arrow-up');
     } else {
-        // Hide
         extraTeam.classList.remove('opacity-100', 'translate-y-0');
         extraTeam.classList.add('opacity-0', 'translate-y-10');
 
-        // Wait for transition to finish
         setTimeout(() => {
             extraTeam.classList.add('hidden');
         }, 700);
@@ -229,13 +189,8 @@ function toggleTeam() {
         btnIcon.classList.add('fa-arrow-down');
     }
 }
-// Make global
 window.toggleTeam = toggleTeam;
 
-/**
- * Open the modal with specific level data
- * @param {string} levelKey - Key to look up in levelData
- */
 function openLevelModal(levelKey) {
     const data = levelData[levelKey];
     if (!data) return;
@@ -245,7 +200,6 @@ function openLevelModal(levelKey) {
     const panel = document.getElementById('modal-panel');
     const headerBg = document.getElementById('modal-header-bg');
 
-    // UI Elements
     const titleEl = document.getElementById('modal-title');
     const subtitleEl = document.getElementById('modal-subtitle');
     const descEl = document.getElementById('modal-description');
@@ -253,20 +207,16 @@ function openLevelModal(levelKey) {
     const benefitsList = document.getElementById('modal-benefits');
     const iconEl = document.getElementById('modal-icon');
 
-    // Populate Data
     titleEl.textContent = data.title;
     subtitleEl.textContent = data.subtitle;
     descEl.textContent = data.description;
 
-    // Update Icon
     if (iconEl && data.icon) {
         iconEl.className = `fas ${data.icon} text-4xl text-white`;
     }
 
-    // Update Header Color
     headerBg.className = `md:w-[38%] relative flex flex-col items-center justify-center p-12 text-center text-white overflow-hidden bg-gradient-to-br ${data.color}`;
 
-    // Populate Lists helper con diseño Ultra-Minimalista Compacto
     const createListItems = (items, colorClass) => {
         return items.map((item, index) => `
             <li class="group flex items-center gap-3 p-2.5 rounded-xl bg-white border border-slate-100 hover:border-primary/20 hover:shadow-sm transition-all duration-300" 
@@ -280,23 +230,17 @@ function openLevelModal(levelKey) {
     featuresList.innerHTML = createListItems(data.features, 'bg-primary');
     benefitsList.innerHTML = createListItems(data.benefits, 'bg-secondary');
 
-    // Show Modal with Animation
     modal.classList.remove('hidden');
 
-    // Slight delay to allow display:block to apply before opacity transition
     setTimeout(() => {
         backdrop.classList.remove('opacity-0');
         panel.classList.remove('opacity-0', 'translate-y-4', 'sm:scale-95');
         panel.classList.add('opacity-100', 'translate-y-0', 'sm:scale-100');
     }, 10);
 
-    // Prevent body scroll
     document.body.style.overflow = 'hidden';
 }
 
-/**
- * Close the level modal
- */
 function closeLevelModal() {
     const modal = document.getElementById('level-modal');
     const backdrop = document.getElementById('modal-backdrop');
@@ -304,21 +248,16 @@ function closeLevelModal() {
 
     if (!modal || modal.classList.contains('hidden')) return;
 
-    // Start transition out
     backdrop.classList.add('opacity-0');
     panel.classList.add('opacity-0', 'translate-y-4', 'sm:scale-95');
     panel.classList.remove('opacity-100', 'translate-y-0', 'sm:scale-100');
 
-    // Wait for transition to finish before hiding
     setTimeout(() => {
         modal.classList.add('hidden');
-        document.body.style.overflow = ''; // Restore scroll
-    }, 300); // Match transition duration
+        document.body.style.overflow = '';
+    }, 300);
 }
 
-/**
- * Modal Control Logic
- */
 const ModalManager = {
     open(type) {
         const modal = document.getElementById(`${type}-modal`);
@@ -339,7 +278,6 @@ const ModalManager = {
 
         document.body.style.overflow = 'hidden';
 
-        // Custom initialization for legal modals
         if (type === 'suggestions' || type === 'complaints') {
             CAPTCHA.generate(type);
         }
@@ -368,12 +306,8 @@ const ModalManager = {
 window.openLegalModal = (type) => ModalManager.open(type);
 window.closeLegalModal = (type) => ModalManager.close(type);
 
-/**
- * Captcha Logic for Legal Modals
- */
 const CAPTCHA = {
     current: { suggestions: 0, complaints: 0 },
-    // Fixed pairs: suggestions = 6+4, complaints = 5+7
     fixed: {
         suggestions: { n1: 6, n2: 4 },
         complaints: { n1: 5, n2: 7 }
@@ -402,9 +336,6 @@ const CAPTCHA = {
     }
 };
 
-/**
- * Form Handlers
- */
 async function handleSuggestionsSubmit(event) {
     event.preventDefault();
     if (!CAPTCHA.validate('suggestions')) {
@@ -434,9 +365,6 @@ async function handleComplaintsSubmit(event) {
 window.handleSuggestionsSubmit = handleSuggestionsSubmit;
 window.handleComplaintsSubmit = handleComplaintsSubmit;
 
-/**
- * Initialize scroll-based effects
- */
 function initScrollEffects() {
     const header = document.querySelector('header');
 
@@ -450,7 +378,6 @@ function initScrollEffects() {
         });
     }
 
-    // Smooth scroll for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             const href = this.getAttribute('href');
@@ -468,9 +395,6 @@ function initScrollEffects() {
     });
 }
 
-/**
- * Initialize mobile menu functionality
- */
 function initMobileMenu() {
     const menuBtn = document.getElementById('mobile-menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
@@ -481,36 +405,31 @@ function initMobileMenu() {
 
     let isMenuOpen = false;
 
-    // Toggle menu
     const toggleMenu = () => {
         isMenuOpen = !isMenuOpen;
 
         if (isMenuOpen) {
-            // Open menu
             mobileMenu.classList.remove('scale-y-0', 'opacity-0');
             mobileMenu.classList.add('scale-y-100', 'opacity-100');
             menuIcon.classList.remove('fa-bars');
             menuIcon.classList.add('fa-times');
             menuBtn.classList.add('rotate-90');
-            document.body.style.overflow = 'hidden'; // Prevent scroll
+            document.body.style.overflow = 'hidden';
         } else {
-            // Close menu
             mobileMenu.classList.remove('scale-y-100', 'opacity-100');
             mobileMenu.classList.add('scale-y-0', 'opacity-0');
             menuIcon.classList.remove('fa-times');
             menuIcon.classList.add('fa-bars');
             menuBtn.classList.remove('rotate-90');
-            document.body.style.overflow = ''; // Restore scroll
+            document.body.style.overflow = '';
         }
     };
 
-    // Button click event
     menuBtn.addEventListener('click', (e) => {
         e.stopPropagation();
         toggleMenu();
     });
 
-    // Close menu when clicking on links
     menuLinks.forEach(link => {
         link.addEventListener('click', () => {
             if (isMenuOpen) {
@@ -519,21 +438,18 @@ function initMobileMenu() {
         });
     });
 
-    // Close menu when clicking outside
     document.addEventListener('click', (e) => {
         if (isMenuOpen && !mobileMenu.contains(e.target) && !menuBtn.contains(e.target)) {
             toggleMenu();
         }
     });
 
-    // Close menu on escape key
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && isMenuOpen) {
             toggleMenu();
         }
     });
 
-    // Close menu on window resize to desktop
     window.addEventListener('resize', () => {
         if (window.innerWidth >= 1024 && isMenuOpen) {
             toggleMenu();
@@ -541,22 +457,11 @@ function initMobileMenu() {
     });
 }
 
-/**
- * Initialize on DOM ready
- */
 document.addEventListener("DOMContentLoaded", () => {
     console.log("🎓 Colegio Federico Villarreal - Website Loaded");
-
-    // Load all components
     ComponentLoader.loadAll();
-
-    // Mobile menu toggle (if needed in future) (Now handled by initMobileMenu inside ComponentLoader, but kept for safety if button exists outside components)
 });
 
-/**
- * Handle Contact Form Submission - Redirect to WhatsApp
- * @param {Event} event - Form submission event
- */
 function handleContactFormSubmit(event) {
     event.preventDefault();
 
@@ -569,16 +474,11 @@ function handleContactFormSubmit(event) {
 
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${message}`;
 
-    // Redirect to WhatsApp
     window.open(whatsappUrl, '_blank');
 }
 
-// Make global for inline onsubmit
 window.handleContactFormSubmit = handleContactFormSubmit;
 
-/**
- * Export for potential module usage
- */
 if (typeof module !== "undefined" && module.exports) {
     module.exports = { ComponentLoader };
 }

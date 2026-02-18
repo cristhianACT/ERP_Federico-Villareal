@@ -1,21 +1,13 @@
-/* ===================================
-   Component-Specific Styles
-   Colegio Federico Villarreal
-   =================================== */
-
-/* Glass morphism effect */
 .glass {
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
 }
 
-/* Text shadow utility */
 .text-shadow {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-/* Card hover effect */
 .card-hover {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -25,13 +17,11 @@
     box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
 
-/* Header scrolled state enhancements */
 header.scrolled {
     background-color: rgba(255, 255, 255, 0.98) !important;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
 }
 
-/* Loading spinner for components */
 .component-loading {
     display: flex;
     justify-content: center;
@@ -55,14 +45,12 @@ header.scrolled {
     }
 }
 
-/* Responsive utilities */
 @media (max-width: 768px) {
     .container {
         padding: 0 1rem;
     }
 }
 
-/* Animation delays for staggered effects */
 .animation-delay-2000 {
     animation-delay: 2s;
 }
@@ -71,7 +59,6 @@ header.scrolled {
     animation-delay: 4s;
 }
 
-/* Enhance focus states for accessibility */
 a:focus,
 button:focus,
 input:focus,
@@ -80,8 +67,8 @@ select:focus {
     outline-offset: 2px;
 }
 
-/* Print styles */
 @media print {
+
     header,
     footer,
     .no-print {
