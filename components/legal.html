@@ -1,0 +1,257 @@
+<!-- Legal Section: Floating Buttons + Modals -->
+
+<!-- ===== FLOATING ACTION BUTTONS ===== -->
+<div class="fixed bottom-6 right-6 z-40 flex flex-col gap-3 items-end">
+
+    <!-- Libro de Reclamaciones Button -->
+    <div class="group flex items-center gap-3">
+        <span
+            class="opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-2 group-hover:translate-x-0 bg-slate-900 text-white text-xs font-semibold px-3 py-1.5 rounded-lg shadow-lg whitespace-nowrap pointer-events-none">
+            Libro de Reclamaciones
+        </span>
+        <button onclick="openLegalModal('complaints')" id="btn-complaints" aria-label="Abrir Libro de Reclamaciones"
+            class="w-14 h-14 rounded-2xl bg-gradient-to-br from-accent to-red-700 text-white shadow-xl shadow-red-900/30 hover:shadow-2xl hover:shadow-red-900/40 hover:-translate-y-1 hover:scale-110 transition-all duration-300 flex items-center justify-center border-2 border-red-400/30">
+            <i class="fas fa-book-open text-xl"></i>
+        </button>
+    </div>
+
+    <!-- Buzón de Sugerencias Button -->
+    <div class="group flex items-center gap-3">
+        <span
+            class="opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-2 group-hover:translate-x-0 bg-slate-900 text-white text-xs font-semibold px-3 py-1.5 rounded-lg shadow-lg whitespace-nowrap pointer-events-none">
+            Buzón de Sugerencias
+        </span>
+        <button onclick="openLegalModal('suggestions')" id="btn-suggestions" aria-label="Abrir Buzón de Sugerencias"
+            class="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary to-primary-light text-white shadow-xl shadow-green-900/30 hover:shadow-2xl hover:shadow-green-900/40 hover:-translate-y-1 hover:scale-110 transition-all duration-300 flex items-center justify-center border-2 border-green-400/30">
+            <i class="fas fa-comment-dots text-xl"></i>
+        </button>
+    </div>
+
+</div>
+
+
+<!-- ===== MODAL: LIBRO DE RECLAMACIONES ===== -->
+<div id="complaints-modal" class="fixed inset-0 z-50 hidden">
+    <!-- Backdrop -->
+    <div id="complaints-backdrop"
+        class="absolute inset-0 bg-slate-900/70 backdrop-blur-sm opacity-0 transition-opacity duration-500"
+        onclick="closeLegalModal('complaints')">
+    </div>
+
+    <!-- Panel -->
+    <div class="relative z-10 flex items-center justify-center min-h-screen p-4">
+        <div id="complaints-panel"
+            class="w-full max-w-2xl bg-white rounded-3xl shadow-2xl opacity-0 translate-y-8 scale-95 transition-all duration-500 overflow-hidden">
+
+            <!-- Header -->
+            <div class="bg-gradient-to-br from-accent to-red-700 p-8 text-white relative overflow-hidden">
+                <div class="absolute -top-10 -right-10 w-40 h-40 bg-white/10 rounded-full blur-2xl"></div>
+                <div class="relative z-10 flex items-center gap-4">
+                    <div
+                        class="w-14 h-14 bg-white/20 rounded-2xl flex items-center justify-center border border-white/30">
+                        <i class="fas fa-book-open text-2xl"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-bold font-heading">Libro de Reclamaciones</h2>
+                        <p class="text-red-100 text-sm mt-0.5">Registra tu reclamo o queja de forma oficial</p>
+                    </div>
+                </div>
+                <!-- Close button -->
+                <button onclick="closeLegalModal('complaints')"
+                    class="absolute top-4 right-4 w-9 h-9 rounded-xl bg-white/20 hover:bg-white/30 flex items-center justify-center transition-colors border border-white/20">
+                    <i class="fas fa-times text-sm"></i>
+                </button>
+            </div>
+
+            <!-- Form Body -->
+            <div class="p-8 max-h-[65vh] overflow-y-auto">
+                <form id="complaints-form" onsubmit="handleComplaintsSubmit(event)" class="space-y-5">
+
+                    <!-- Apellidos y Nombres -->
+                    <div class="space-y-1.5">
+                        <label for="comp-name" class="text-sm font-bold text-slate-700 flex items-center gap-2">
+                            <i class="fas fa-user text-accent text-xs"></i>
+                            Apellidos y Nombres <span class="text-accent">*</span>
+                        </label>
+                        <input type="text" id="comp-name" placeholder="Ej. García López, María" required
+                            class="w-full px-5 py-3.5 rounded-xl bg-slate-50 border border-slate-200 focus:border-accent focus:ring-4 focus:ring-red-100 outline-none transition-all text-slate-800 placeholder-slate-400">
+                    </div>
+
+                    <!-- Domicilio -->
+                    <div class="space-y-1.5">
+                        <label for="comp-address" class="text-sm font-bold text-slate-700 flex items-center gap-2">
+                            <i class="fas fa-map-marker-alt text-accent text-xs"></i>
+                            Domicilio <span class="text-accent">*</span>
+                        </label>
+                        <input type="text" id="comp-address" placeholder="Ej. Av. Grau 123, Piura" required
+                            class="w-full px-5 py-3.5 rounded-xl bg-slate-50 border border-slate-200 focus:border-accent focus:ring-4 focus:ring-red-100 outline-none transition-all text-slate-800 placeholder-slate-400">
+                    </div>
+
+                    <!-- DNI / CE + Teléfono -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="space-y-1.5">
+                            <label for="comp-dni" class="text-sm font-bold text-slate-700 flex items-center gap-2">
+                                <i class="fas fa-id-card text-accent text-xs"></i>
+                                DNI / CE <span class="text-accent">*</span>
+                            </label>
+                            <input type="text" id="comp-dni" placeholder="Ej. 12345678" required maxlength="12"
+                                class="w-full px-5 py-3.5 rounded-xl bg-slate-50 border border-slate-200 focus:border-accent focus:ring-4 focus:ring-red-100 outline-none transition-all text-slate-800 placeholder-slate-400">
+                        </div>
+                        <div class="space-y-1.5">
+                            <label for="comp-phone" class="text-sm font-bold text-slate-700 flex items-center gap-2">
+                                <i class="fas fa-phone text-accent text-xs"></i>
+                                Teléfono <span class="text-accent">*</span>
+                            </label>
+                            <input type="tel" id="comp-phone" placeholder="Ej. 980 160 029" required
+                                class="w-full px-5 py-3.5 rounded-xl bg-slate-50 border border-slate-200 focus:border-accent focus:ring-4 focus:ring-red-100 outline-none transition-all text-slate-800 placeholder-slate-400">
+                        </div>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="space-y-1.5">
+                        <label for="comp-email" class="text-sm font-bold text-slate-700 flex items-center gap-2">
+                            <i class="fas fa-envelope text-accent text-xs"></i>
+                            Correo Electrónico <span class="text-accent">*</span>
+                        </label>
+                        <input type="email" id="comp-email" placeholder="correo@ejemplo.com" required
+                            class="w-full px-5 py-3.5 rounded-xl bg-slate-50 border border-slate-200 focus:border-accent focus:ring-4 focus:ring-red-100 outline-none transition-all text-slate-800 placeholder-slate-400">
+                    </div>
+
+                    <!-- Detalle del Reclamo -->
+                    <div class="space-y-1.5">
+                        <label for="comp-detail" class="text-sm font-bold text-slate-700 flex items-center gap-2">
+                            <i class="fas fa-file-alt text-accent text-xs"></i>
+                            Detalle del Reclamo o Queja <span class="text-accent">*</span>
+                        </label>
+                        <textarea id="comp-detail" rows="4" placeholder="Describe detalladamente tu reclamo o queja..."
+                            required
+                            class="w-full px-5 py-3.5 rounded-xl bg-slate-50 border border-slate-200 focus:border-accent focus:ring-4 focus:ring-red-100 outline-none transition-all text-slate-800 placeholder-slate-400 resize-none"></textarea>
+                    </div>
+
+                    <!-- Validación CAPTCHA -->
+                    <div class="bg-red-50 border border-red-100 rounded-2xl p-5 space-y-3">
+                        <p id="complaints-captcha-text"
+                            class="text-sm font-bold text-slate-700 flex items-center gap-2">
+                            <i class="fas fa-shield-alt text-accent"></i>
+                            VALIDACIÓN: ¿5 + 7?
+                        </p>
+                        <input type="number" id="complaints-captcha-input" placeholder="Ingresa el resultado" required
+                            class="w-full px-5 py-3 rounded-xl bg-white border border-red-200 focus:border-accent focus:ring-4 focus:ring-red-100 outline-none transition-all text-slate-800 placeholder-slate-400 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none">
+                    </div>
+
+                    <!-- Submit -->
+                    <button type="submit"
+                        class="w-full bg-gradient-to-r from-accent to-red-700 hover:from-red-700 hover:to-accent text-white font-bold text-base py-4 rounded-xl shadow-lg shadow-red-900/20 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-3">
+                        <i class="fas fa-paper-plane"></i>
+                        Registrar Reclamo
+                    </button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- ===== MODAL: BUZÓN DE SUGERENCIAS ===== -->
+<div id="suggestions-modal" class="fixed inset-0 z-50 hidden">
+    <!-- Backdrop -->
+    <div id="suggestions-backdrop"
+        class="absolute inset-0 bg-slate-900/70 backdrop-blur-sm opacity-0 transition-opacity duration-500"
+        onclick="closeLegalModal('suggestions')">
+    </div>
+
+    <!-- Panel -->
+    <div class="relative z-10 flex items-center justify-center min-h-screen p-4">
+        <div id="suggestions-panel"
+            class="w-full max-w-lg bg-white rounded-3xl shadow-2xl opacity-0 translate-y-8 scale-95 transition-all duration-500 overflow-hidden">
+
+            <!-- Header -->
+            <div class="bg-gradient-to-br from-primary to-primary-light p-8 text-white relative overflow-hidden">
+                <div class="absolute -top-10 -right-10 w-40 h-40 bg-white/10 rounded-full blur-2xl"></div>
+                <div class="relative z-10 flex items-center gap-4">
+                    <div
+                        class="w-14 h-14 bg-white/20 rounded-2xl flex items-center justify-center border border-white/30">
+                        <i class="fas fa-comment-dots text-2xl"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-bold font-heading">Buzón de Sugerencias</h2>
+                        <p class="text-green-100 text-sm mt-0.5">Tu opinión nos ayuda a mejorar</p>
+                    </div>
+                </div>
+                <!-- Close button -->
+                <button onclick="closeLegalModal('suggestions')"
+                    class="absolute top-4 right-4 w-9 h-9 rounded-xl bg-white/20 hover:bg-white/30 flex items-center justify-center transition-colors border border-white/20">
+                    <i class="fas fa-times text-sm"></i>
+                </button>
+            </div>
+
+            <!-- Form Body -->
+            <div class="p-8 max-h-[65vh] overflow-y-auto">
+                <form id="suggestions-form" onsubmit="handleSuggestionsSubmit(event)" class="space-y-5">
+
+                    <!-- DNI -->
+                    <div class="space-y-1.5">
+                        <label for="suggestion-dni" class="text-sm font-bold text-slate-700 flex items-center gap-2">
+                            <i class="fas fa-id-card text-primary text-xs"></i>
+                            DNI <span class="text-accent">*</span>
+                        </label>
+                        <input type="text" id="suggestion-dni" placeholder="Ej. 12345678" required maxlength="12"
+                            class="w-full px-5 py-3.5 rounded-xl bg-slate-50 border border-slate-200 focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition-all text-slate-800 placeholder-slate-400">
+                    </div>
+
+                    <!-- Nombre -->
+                    <div class="space-y-1.5">
+                        <label for="suggestion-name" class="text-sm font-bold text-slate-700 flex items-center gap-2">
+                            <i class="fas fa-user text-primary text-xs"></i>
+                            Nombre <span class="text-accent">*</span>
+                        </label>
+                        <input type="text" id="suggestion-name" placeholder="Ej. María García" required
+                            class="w-full px-5 py-3.5 rounded-xl bg-slate-50 border border-slate-200 focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition-all text-slate-800 placeholder-slate-400">
+                    </div>
+
+                    <!-- Email -->
+                    <div class="space-y-1.5">
+                        <label for="suggestion-email" class="text-sm font-bold text-slate-700 flex items-center gap-2">
+                            <i class="fas fa-envelope text-primary text-xs"></i>
+                            Correo Electrónico <span class="text-accent">*</span>
+                        </label>
+                        <input type="email" id="suggestion-email" placeholder="correo@ejemplo.com" required
+                            class="w-full px-5 py-3.5 rounded-xl bg-slate-50 border border-slate-200 focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition-all text-slate-800 placeholder-slate-400">
+                    </div>
+
+                    <!-- Mensaje Constructivo -->
+                    <div class="space-y-1.5">
+                        <label for="suggestion-message"
+                            class="text-sm font-bold text-slate-700 flex items-center gap-2">
+                            <i class="fas fa-lightbulb text-primary text-xs"></i>
+                            Mensaje Constructivo <span class="text-accent">*</span>
+                        </label>
+                        <textarea id="suggestion-message" rows="4"
+                            placeholder="Comparte tu sugerencia para mejorar nuestra institución..." required
+                            class="w-full px-5 py-3.5 rounded-xl bg-slate-50 border border-slate-200 focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition-all text-slate-800 placeholder-slate-400 resize-none"></textarea>
+                    </div>
+
+                    <!-- Validación CAPTCHA -->
+                    <div class="bg-green-50 border border-green-100 rounded-2xl p-5 space-y-3">
+                        <p id="suggestions-captcha-text"
+                            class="text-sm font-bold text-slate-700 flex items-center gap-2">
+                            <i class="fas fa-shield-alt text-primary"></i>
+                            SEGURIDAD: ¿6 + 4?
+                        </p>
+                        <input type="number" id="suggestions-captcha-input" placeholder="Ingresa el resultado" required
+                            class="w-full px-5 py-3 rounded-xl bg-white border border-green-200 focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition-all text-slate-800 placeholder-slate-400 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none">
+                    </div>
+
+                    <!-- Submit -->
+                    <button type="submit"
+                        class="w-full bg-gradient-to-r from-primary to-primary-light hover:from-primary-light hover:to-primary text-white font-bold text-base py-4 rounded-xl shadow-lg shadow-green-900/20 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-3">
+                        <i class="fas fa-paper-plane"></i>
+                        Enviar Sugerencia
+                    </button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -41,6 +41,7 @@ const ComponentLoader = {
             { path: 'components/levels.html', target: '#levels-component' },
             { path: 'components/proposal.html', target: '#proposal-component' },
             { path: 'components/contact.html', target: '#contact-component' },
+            { path: 'components/legal.html', target: '#legal-component' },
             { path: 'components/footer.html', target: '#footer-component' }
         ];
 
@@ -314,6 +315,124 @@ function closeLevelModal() {
         document.body.style.overflow = ''; // Restore scroll
     }, 300); // Match transition duration
 }
+
+/**
+ * Modal Control Logic
+ */
+const ModalManager = {
+    open(type) {
+        const modal = document.getElementById(`${type}-modal`);
+        const backdrop = document.getElementById(`${type}-backdrop`);
+        const panel = document.getElementById(`${type}-panel`);
+
+        if (!modal) return;
+
+        modal.classList.remove('hidden');
+
+        setTimeout(() => {
+            if (backdrop) backdrop.classList.remove('opacity-0');
+            if (panel) {
+                panel.classList.remove('opacity-0', 'translate-y-8', 'scale-95');
+                panel.classList.add('opacity-100', 'translate-y-0', 'scale-100');
+            }
+        }, 10);
+
+        document.body.style.overflow = 'hidden';
+
+        // Custom initialization for legal modals
+        if (type === 'suggestions' || type === 'complaints') {
+            CAPTCHA.generate(type);
+        }
+    },
+
+    close(type) {
+        const modal = document.getElementById(`${type}-modal`);
+        const backdrop = document.getElementById(`${type}-backdrop`);
+        const panel = document.getElementById(`${type}-panel`);
+
+        if (!modal || modal.classList.contains('hidden')) return;
+
+        if (backdrop) backdrop.classList.add('opacity-0');
+        if (panel) {
+            panel.classList.add('opacity-0', 'translate-y-8', 'scale-95');
+            panel.classList.remove('opacity-100', 'translate-y-0', 'scale-100');
+        }
+
+        setTimeout(() => {
+            modal.classList.add('hidden');
+            document.body.style.overflow = '';
+        }, 500);
+    }
+};
+
+window.openLegalModal = (type) => ModalManager.open(type);
+window.closeLegalModal = (type) => ModalManager.close(type);
+
+/**
+ * Captcha Logic for Legal Modals
+ */
+const CAPTCHA = {
+    current: { suggestions: 0, complaints: 0 },
+    // Fixed pairs: suggestions = 6+4, complaints = 5+7
+    fixed: {
+        suggestions: { n1: 6, n2: 4 },
+        complaints: { n1: 5, n2: 7 }
+    },
+
+    generate(type) {
+        const pair = this.fixed[type];
+        const n1 = pair ? pair.n1 : (Math.floor(Math.random() * 9) + 1);
+        const n2 = pair ? pair.n2 : (Math.floor(Math.random() * 9) + 1);
+        this.current[type] = n1 + n2;
+        const textEl = document.getElementById(`${type}-captcha-text`);
+        if (textEl) {
+            const iconClass = type === 'suggestions' ? 'text-primary' : 'text-accent';
+            const label = type === 'suggestions' ? 'SEGURIDAD' : 'VALIDACIÓN';
+            textEl.innerHTML = `<i class="fas fa-shield-alt ${iconClass}"></i> ${label}: ¿${n1} + ${n2}?`;
+        }
+        const inputEl = document.getElementById(`${type}-captcha-input`);
+        if (inputEl) inputEl.value = '';
+    },
+
+    validate(type) {
+        const inputEl = document.getElementById(`${type}-captcha-input`);
+        if (!inputEl) return false;
+        const inputVal = parseInt(inputEl.value);
+        return inputVal === this.current[type];
+    }
+};
+
+/**
+ * Form Handlers
+ */
+async function handleSuggestionsSubmit(event) {
+    event.preventDefault();
+    if (!CAPTCHA.validate('suggestions')) {
+        alert("❌ La validación de seguridad es incorrecta. Inténtalo de nuevo.");
+        CAPTCHA.generate('suggestions');
+        return;
+    }
+    const name = document.getElementById('suggestion-name')?.value || 'Usuario';
+    alert(`✅ ¡Gracias ${name}! Tu sugerencia ha sido recibida.`);
+    ModalManager.close('suggestions');
+    event.target.reset();
+}
+
+async function handleComplaintsSubmit(event) {
+    event.preventDefault();
+    if (!CAPTCHA.validate('complaints')) {
+        alert("❌ La validación matemática es incorrecta.");
+        CAPTCHA.generate('complaints');
+        return;
+    }
+    const name = document.getElementById('comp-name')?.value || 'Usuario';
+    alert(`✅ Registro oficial exitoso. Sr(a). ${name}, su reclamo ha sido registrado.`);
+    ModalManager.close('complaints');
+    event.target.reset();
+}
+
+window.handleSuggestionsSubmit = handleSuggestionsSubmit;
+window.handleComplaintsSubmit = handleComplaintsSubmit;
 
 /**
  * Initialize scroll-based effects
