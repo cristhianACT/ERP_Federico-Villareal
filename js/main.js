@@ -339,12 +339,12 @@ const CAPTCHA = {
 async function handleSuggestionsSubmit(event) {
     event.preventDefault();
     if (!CAPTCHA.validate('suggestions')) {
-        alert("❌ La validación de seguridad es incorrecta. Inténtalo de nuevo.");
+        alert(" La validación de seguridad es incorrecta. Inténtalo de nuevo.");
         CAPTCHA.generate('suggestions');
         return;
     }
     const name = document.getElementById('suggestion-name')?.value || 'Usuario';
-    alert(`✅ ¡Gracias ${name}! Tu sugerencia ha sido recibida.`);
+    alert(` ¡Gracias ${name}! Tu sugerencia ha sido recibida.`);
     ModalManager.close('suggestions');
     event.target.reset();
 }
@@ -352,12 +352,12 @@ async function handleSuggestionsSubmit(event) {
 async function handleComplaintsSubmit(event) {
     event.preventDefault();
     if (!CAPTCHA.validate('complaints')) {
-        alert("❌ La validación matemática es incorrecta.");
+        alert(" La validación matemática es incorrecta.");
         CAPTCHA.generate('complaints');
         return;
     }
     const name = document.getElementById('comp-name')?.value || 'Usuario';
-    alert(`✅ Registro oficial exitoso. Sr(a). ${name}, su reclamo ha sido registrado.`);
+    alert(` Registro oficial exitoso. Sr(a). ${name}, su reclamo ha sido registrado.`);
     ModalManager.close('complaints');
     event.target.reset();
 }
@@ -458,7 +458,7 @@ function initMobileMenu() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    console.log("🎓 Colegio Federico Villarreal - Website Loaded");
+    console.log("Colegio Federico Villarreal - Pagina Cargada");
     ComponentLoader.loadAll();
 });
 
