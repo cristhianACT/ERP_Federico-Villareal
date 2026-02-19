@@ -343,10 +343,45 @@ async function handleSuggestionsSubmit(event) {
         CAPTCHA.generate('suggestions');
         return;
     }
-    const name = document.getElementById('suggestion-name')?.value || 'Usuario';
-    alert(` ¡Gracias ${name}! Tu sugerencia ha sido recibida.`);
-    ModalManager.close('suggestions');
-    event.target.reset();
+
+    const submitBtn = event.target.querySelector('button[type="submit"]');
+    const originalBtnText = submitBtn.innerHTML;
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+
+    const formData = {
+        dni: document.getElementById('suggestion-dni')?.value,
+        nombre: document.getElementById('suggestion-name')?.value,
+        email: document.getElementById('suggestion-email')?.value,
+        mensaje: document.getElementById('suggestion-message')?.value,
+        tipo: 'sugerencia',
+        fecha: new Date().toISOString()
+    };
+
+    try {
+        const response = await fetch('https://api.tu-dominio.com/api/sugerencias', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        });
+
+        if (!response.ok) throw new Error('Error en el servidor');
+
+        const result = await response.json();
+        alert(` ¡Gracias ${formData.nombre}! Tu sugerencia ha sido recibida.`);
+        ModalManager.close('suggestions');
+        event.target.reset();
+        CAPTCHA.generate('suggestions');
+
+    } catch (error) {
+        console.error('Error:', error);
+        alert("Hubo un problema al enviar tu sugerencia. Por favor intenta de nuevo.");
+    } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalBtnText;
+    }
 }
 
 async function handleComplaintsSubmit(event) {
@@ -356,10 +391,47 @@ async function handleComplaintsSubmit(event) {
         CAPTCHA.generate('complaints');
         return;
     }
-    const name = document.getElementById('comp-name')?.value || 'Usuario';
-    alert(` Registro oficial exitoso. Sr(a). ${name}, su reclamo ha sido registrado.`);
-    ModalManager.close('complaints');
-    event.target.reset();
+
+    const submitBtn = event.target.querySelector('button[type="submit"]');
+    const originalBtnText = submitBtn.innerHTML;
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Registrando...';
+
+    const formData = {
+        nombres: document.getElementById('comp-name')?.value,
+        domicilio: document.getElementById('comp-address')?.value,
+        dni: document.getElementById('comp-dni')?.value,
+        telefono: document.getElementById('comp-phone')?.value,
+        email: document.getElementById('comp-email')?.value,
+        detalle: document.getElementById('comp-detail')?.value,
+        tipo: 'reclamo',
+        fecha: new Date().toISOString()
+    };
+
+    try {
+        const response = await fetch('https://api.tu-dominio.com/api/reclamos', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        });
+
+        if (!response.ok) throw new Error('Error en el servidor');
+
+        const result = await response.json();
+        alert(` Registro oficial exitoso. Sr(a). ${formData.nombres}, su reclamo ha sido registrado. Código: ${result.codigo || 'PENDIENTE'}`);
+        ModalManager.close('complaints');
+        event.target.reset();
+        CAPTCHA.generate('complaints');
+
+    } catch (error) {
+        console.error('Error:', error);
+        alert("Hubo un problema al registrar tu reclamo. Por favor intenta de nuevo.");
+    } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalBtnText;
+    }
 }
 
 window.handleSuggestionsSubmit = handleSuggestionsSubmit;
